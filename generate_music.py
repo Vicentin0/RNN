@@ -1,10 +1,5 @@
 from funcs import*
 
-import sys
-sys.path.append('..\\model')
-
-#C:\Program Files\FFmpeg\bin
-
 import rnn
 
 import pretty_midi
@@ -17,7 +12,7 @@ TEMPERATURE = 6
 
 
 # Extract notes from MIDI file
-all_musics = [extract_notes_from_midi(f"..\\data\\training_music\\{i}.mid") for i in [1,1] ]
+all_musics = [extract_notes_from_midi(f"") for i in [1,1] ]
 created_music = []
 
 
@@ -76,19 +71,6 @@ for sequence_notes in all_musics:
         x[0][next_note_idx] = 1
     
     created_music.append(generated_sequence)
-
-"""Save to file""" 
-instruments = []
-
-#intruments .midi
-
-#bass_channel = 2
-#bass_instrument = 32
-#midi.addProgramChange(track, bass_channel, time, bass_instrument)
-#
-#flute_channel = 3
-#flute_instrument = 73
-#midi.addProgramChange(track, flute_channel, time, flute_instrument)
 
 
 save_midi_to_file(created_music[-2:])
