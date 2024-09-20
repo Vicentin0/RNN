@@ -49,10 +49,10 @@ def frequency_to_midi_note(frequency):
     return int(round(69 + 12 * np.log2(frequency / 440.0)))
 
 def extract_notes_from_mp3(filename:str):
-    audio = AudioSegment.from_mp3(f"..\\data\\training_music\\{filename}")
-    audio.export("..\\data\\nvm\\converted_file.wav", format="wav")
+    audio = AudioSegment.from_mp3(f"{filename}")
+    audio.export("converted_file.wav", format="wav")
 
-    y, sr = librosa.load("..\\data\\nvm\\converted_file.wav")
+    y, sr = librosa.load("converted_file.wav")
 
     pitches, magnitudes = librosa.piptrack(y=y, sr=sr)
     
@@ -66,7 +66,7 @@ def extract_notes_from_mp3(filename:str):
             
     return ret
 
-def save_midi_to_file(note_sequences,filename = "..\\generated\\music\\generated_music.midi", tempo = 120, track = 0, channel = 0, time = 0, duration = .7, volume = 100):
+def save_midi_to_file(note_sequences,filename = "generated_music.midi", tempo = 120, track = 0, channel = 0, time = 0, duration = .7, volume = 100):
 
     filename = get_unique_filename(filename)
     midi = MIDIFile(1)
@@ -91,7 +91,7 @@ def save_midi_to_file(note_sequences,filename = "..\\generated\\music\\generated
     with open(filename, "wb") as output_file:
         midi.writeFile(output_file)   
 
-def save_midi(note_sequences, filename="..\\generated\\music\\rock_guitar_music.midi", tempo=120, duration_per_note=0.7):
+def save_midi(note_sequences, filename="rock_guitar_music.midi", tempo=120, duration_per_note=0.7):
     """
     Save note sequences as a MIDI file with a rock guitar instrument.
     """
